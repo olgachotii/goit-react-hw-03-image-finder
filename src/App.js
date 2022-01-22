@@ -1,6 +1,6 @@
 import "./App.scss";
 import { Component } from "react";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import Modal from "./component/Modal";
 import Searchbar from "./component/Searchbar";
@@ -31,12 +31,17 @@ class App extends Component {
         `https://pixabay.com/api/?key=24287584-f260c6215a8f38269d114f00b&&image_type=photo&orientation=horizontal&page=${page}&per_page=12&q=${value}`
       )
         .then((res) => res.json())
-        .then((data) =>
+        .then((data) => {
           this.setState({
             pictures:
               page === 1 ? data.hits : [...this.state.pictures, ...data.hits],
-          })
-        )
+          });
+          if (data.total === 0) {
+            toast.warning(
+              `oops, we didn't find any images on request ${value}`
+            );
+          }
+        })
         .catch((error) => console.log(error))
         .finally(() => this.setState({ loading: false }));
     }
