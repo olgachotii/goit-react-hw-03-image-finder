@@ -1,8 +1,8 @@
 import "./ImageGalleryItem.scss";
 
-const ImageGalleryItem = ({ largeImageURL, webformatURL, id, onClick }) => {
+const ImageGalleryItem = ({ largeImageURL, webformatURL, onClick }) => {
   return (
-    <li key={id} className="ImageGalleryItem">
+    <li className="ImageGalleryItem">
       <img
         src={webformatURL}
         alt=""

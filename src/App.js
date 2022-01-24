@@ -2,6 +2,7 @@ import "./App.scss";
 import { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
+import api from "./component/servises/apiServises";
 import Modal from "./component/Modal";
 import Searchbar from "./component/Searchbar";
 import ImageGallery from "./component/ImageGallery";
@@ -27,10 +28,8 @@ class App extends Component {
         loading: true,
       }));
 
-      fetch(
-        `https://pixabay.com/api/?key=24287584-f260c6215a8f38269d114f00b&&image_type=photo&orientation=horizontal&page=${page}&per_page=12&q=${value}`
-      )
-        .then((res) => res.json())
+      api
+        .getData(value, page)
         .then((data) => {
           this.setState({
             pictures:
